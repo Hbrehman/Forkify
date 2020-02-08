@@ -14,6 +14,11 @@ export default class Likes {
         return like;
     }
 
+    deleteLike(id) {
+        const index = this.likes.findIndex(c => c.id === id);
+        this.likes.splice(index, 1);
+    }
+
     isLiked(id) {
         return this.likes.findIndex(c => c.id === id) !== -1;
     }
