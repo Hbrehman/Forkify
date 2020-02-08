@@ -18,22 +18,22 @@ export const highlightSelected = id => {
 }
 
 
+export const limitRecipeTitle = (title, limit = 17) => {
+    const newTitle = [];
+    if (title.length > 17) {
+        title.split(' ').reduce((acu, cur) => {
+           if (acu + cur.length < limit) {
+               newTitle.push(cur);
+           }
+           return acu + cur.length;
+        }, 0)
+        return `${newTitle.join(' ')} ...`;
+    }
+    return title;
+}
+
+
  const renderRecipes = (c) => {
-     const limitRecipeTitle = (title, limit = 17) => {
-         const newTitle = [];
-         if (title.length > 17) {
-             title.split(' ').reduce((acu, cur) => {
-                if (acu + cur.length < limit) {
-                    newTitle.push(cur);
-                }
-                return acu + cur.length;
-             }, 0)
-             return `${newTitle.join(' ')} ...`;
-         }
-         return title;
-     }
-
-
     const markup = `<li>
         <a class="results__link" href="#${c.recipe_id}" data-goto="${c.recipe_id}">
             <figure class="results__fig">
