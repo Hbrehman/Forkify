@@ -113,7 +113,6 @@ const controlRecipe = async () => {
      })
  }
 
- state.likes = new Likes();
 const controlLike = () => {
     if(!state.likes) state.likes = new Likes();
     const currentID = state.recipe.id;
@@ -174,6 +173,26 @@ const controlLike = () => {
         console.log(' id not found...');
     }
  })
+
+ // Restore liked recipes
+
+ window.addEventListener('load', () => {
+
+    state.likes = new Likes();
+
+    // restore likes 
+    state.likes.readStorage();
+
+    // Toggle like menu button 
+    likeView.toggleLikeMenu(state.likes.getNumLikes());
+    // render the existing likes
+    state.likes.likes.forEach(like => {
+        likeView.renderLike(like);
+    })
+ })
+
+
+
 
 // Handling recipe button clicks
 
